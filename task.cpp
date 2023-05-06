@@ -12,7 +12,7 @@ int menu(){
     cin >> response;
     return response;
 }
-void add(ofstream &ar){
+void Add(ofstream &ar){
     system("cls");
     string task;
     ar.open("task.txt", ios::app);
@@ -21,7 +21,7 @@ void add(ofstream &ar){
     ar << task << endl;
     ar.close();
 }
-void see(ifstream &lec){
+void See(ifstream &lec){
     system("cls");
     string task;
     int i = 1;
@@ -36,27 +36,27 @@ void see(ifstream &lec){
     lec.close();
     system("pause");
 }
-void erase() {
+void Erase() {
     system("cls");
     string taskAux, task;
-    ifstream lec("task.txt", ios::in);
-    ofstream esc("aux.txt", ios::out);
-    if (!lec.is_open()) {
+    ifstream read("task.txt", ios::in);
+    ofstream write("aux.txt", ios::out);
+    if (!read.is_open()) {
         cout << "Could not open the task file" << endl;
         return;
     }
     cout << "Enter the task to delete: ";
     cin >> taskAux;
     bool find = false;
-    while (lec >> task) {
+    while (read >> task) {
         if (task == taskAux) {
             find = true;
         } else {
-            esc << task << endl;
+            write << task << endl;
         }
     }
-    lec.close();
-    esc.close();
+    read.close();
+    write.close();
     if (find) {
         remove("task.txt");
         rename("aux.txt", "task.txt");
@@ -75,13 +75,13 @@ int main() {
         option = menu();
         switch (option){
             case 1:
-                add(write);
+                Add(write);
                 break;
             case 2:
-                see(read);
+                See(read);
                 break;
             case 3:
-                erase();
+                Erase();
                 break;
             default:
                 break;
